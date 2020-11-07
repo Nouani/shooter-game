@@ -1,32 +1,26 @@
 import pygame as pg
+from game import Game
 
 pg.init()
-
-class Player(pg.sprite.Sprite):
-    def __init__(self):
-        super().__init__()
-        self.health = 100
-        self.max_health = 100
-        self.attack = 10
-        self.velocity = 5
-        self.image = pg.image.load('assets/player.png')
-        self.rect = self.image.get_rect()
-        self.rect.x = 400
-        self.rect.y = 300
 
 pg.display.set_caption("Shooter Game")
 screen = pg.display.set_mode((1280, 720))
 
 background = pg.image.load('assets/bg.jpg')
 
-player = Player()
+game = Game()
 
 running = True
 
 while running:
     screen.blit(background, (0, -200))
 
-    screen.blit(player.image, player.rect)
+    screen.blit(game.player.image, game.player.rect)
+
+    if game.pressed.get(pg.K_RIGHT) and game.player.rect.x + game.player.rect.width - 35 < screen.get_width():
+        game.player.moveRight()
+    elif game.pressed.get(pg.K_LEFT) and game.player.rect.x + 35 > 0:
+        game.player.moveLeft()
 
     pg.display.flip()
 
@@ -34,3 +28,7 @@ while running:
         if event.type == pg.QUIT:
             running = False
             pg.quit()
+        elif event.type == pg.KEYDOWN:
+            game.pressed[event.key] = True
+        elif event.type == pg.KEYUP:
+            game.pressed[event.key] = False
