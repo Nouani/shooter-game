@@ -17,6 +17,9 @@ while running:
 
     screen.blit(game.player.image, game.player.rect)
 
+    for projectile in game.player.allProjectiles:
+        projectile.move()
+
     game.player.allProjectiles.draw(screen)
 
     if game.pressed.get(pg.K_RIGHT) and game.player.rect.x + game.player.rect.width - 35 < screen.get_width():
