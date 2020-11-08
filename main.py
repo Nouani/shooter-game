@@ -20,7 +20,12 @@ while running:
     for projectile in game.player.allProjectiles:
         projectile.move()
 
+    for monster in game.allMonsters:
+        monster.forward()
+
     game.player.allProjectiles.draw(screen)
+
+    game.allMonsters.draw(screen)
 
     if game.pressed.get(pg.K_RIGHT) and game.player.rect.x + game.player.rect.width - 35 < screen.get_width():
         game.player.moveRight()
