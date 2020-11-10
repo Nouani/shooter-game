@@ -17,8 +17,9 @@ class Projectile(pg.sprite.Sprite):
         self.rect.x += self.velocity
         self.rotate()
 
-        if self.player.game.checkCollision(self, self.player.game.allMonsters):
-            self.remove()
+        for monster in self.player.game.checkCollision(self, self.player.game.allMonsters):
+            self.remove() 
+            monster.damage(self.player.attack)
 
         if self.rect.x > 1280:
             self.remove()

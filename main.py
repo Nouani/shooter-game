@@ -22,6 +22,7 @@ while running:
 
     for monster in game.allMonsters:
         monster.forward()
+        monster.updateHealthBar(screen)
 
     game.player.allProjectiles.draw(screen)
 

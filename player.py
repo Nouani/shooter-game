@@ -6,7 +6,7 @@ class Player(pg.sprite.Sprite):
         super().__init__()
         self.game = game
         self.health = 100
-        self.max_health = 100
+        self.maxHealth = 100
         self.attack = 10
         self.velocity = 1.4
         self.allProjectiles = pg.sprite.Group()
