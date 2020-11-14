@@ -8,7 +8,7 @@ class Player(pg.sprite.Sprite):
         self.health = 100
         self.maxHealth = 100
         self.attack = 10
-        self.velocity = 1.4
+        self.velocity = 10
         self.allProjectiles = pg.sprite.Group()
         self.image = pg.image.load('assets/player.png')
         self.rect = self.image.get_rect()
@@ -17,7 +17,7 @@ class Player(pg.sprite.Sprite):
     
     def moveRight(self):
         if not self.game.checkCollision(self, self.game.allMonsters):
-            self.rect.x += self.velocity * 2
+            self.rect.x += self.velocity
     
     def moveLeft(self):
         self.rect.x -= self.velocity

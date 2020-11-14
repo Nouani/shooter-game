@@ -1,4 +1,5 @@
 import pygame as pg
+import random
 
 class Monster(pg.sprite.Sprite):
     def __init__(self, game):
@@ -9,25 +10,20 @@ class Monster(pg.sprite.Sprite):
         self.attack = 5
         self.image = pg.image.load('assets/mummy.png')
         self.rect = self.image.get_rect()
-        self.rect.x = 1000
+        self.rect.x = 1000 + random.randint(0, 500)
         self.rect.y = 540
-        self.velocity = 1
+        self.velocity = random.randint(2,4)
 
     def damage(self, amount):
         self.health -= amount
         if self.health <= 0:
-            self.rect.x = 1000
+            self.rect.x = 1000 + random.randint(0, 500)
+            self.velocity = random.randint(2, 4)
             self.health = self.maxHealth
 
     def updateHealthBar(self, surface):
-        barColor = (111, 210, 46)
-        backBarColor = (60, 63, 60)
-
-        backBarPosition = [self.rect.x + 13, self.rect.y - 10, self.maxHealth, 5]
-        barPosition = [self.rect.x + 13, self.rect.y - 10, self.health, 5]
-
-        pg.draw.rect(surface, backBarColor, backBarPosition)
-        pg.draw.rect(surface, barColor, barPosition)
+        pg.draw.rect(surface, (60, 63, 60), [self.rect.x + 13, self.rect.y - 10, self.maxHealth, 5])
+        pg.draw.rect(surface, (111, 210, 46), [self.rect.x + 13, self.rect.y - 10, self.health, 5])
 
     def forward(self):
         if not self.game.checkCollision(self, self.game.allPlayers):

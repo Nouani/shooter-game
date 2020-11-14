@@ -10,6 +10,7 @@ class Game:
         self.allMonsters = pg.sprite.Group()
         self.pressed = {}
         self.spawnMonster()
+        self.spawnMonster()
 
     def checkCollision(self, sprite, group):
         return pg.sprite.spritecollide(sprite, group, False, pg.sprite.collide_mask)

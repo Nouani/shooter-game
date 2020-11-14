@@ -10,6 +10,7 @@ background = pg.image.load('assets/bg.jpg')
 
 game = Game()
 
+clock = pg.time.Clock()
 running = True
 
 while running:
@@ -35,6 +36,8 @@ while running:
 
     pg.display.flip()
 
+    clock.tick(60)
+
     for event in pg.event.get():
         if event.type == pg.QUIT:
             running = False
@@ -46,3 +49,5 @@ while running:
                 game.player.launchProjectile()
         elif event.type == pg.KEYUP:
             game.pressed[event.key] = False
+    
+    

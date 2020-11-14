@@ -3,7 +3,7 @@ import pygame as pg
 class Projectile(pg.sprite.Sprite):
     def __init__(self, player):
         super().__init__()
-        self.velocity = 1.6
+        self.velocity = 6
         self.player = player
         self.image = pg.image.load('assets/projectile.png')
         self.image = pg.transform.scale(self.image, (50, 50))
@@ -28,6 +28,6 @@ class Projectile(pg.sprite.Sprite):
         self.player.allProjectiles.remove(self)
 
     def rotate(self):
-        self.angle += 6
+        self.angle += 16
         self.image = pg.transform.rotozoom(self.origin_image, self.angle, 1)
         self.rect = self.image.get_rect(center=self.rect.center)
