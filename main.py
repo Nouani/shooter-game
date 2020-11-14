@@ -8,6 +8,18 @@ screen = pg.display.set_mode((1280, 720))
 
 background = pg.image.load('assets/bg.jpg')
 
+banner = pg.image.load('assets/banner.png')
+banner = pg.transform.scale(banner, (500, 500))
+bannerRect = banner.get_rect()
+bannerRect.x = (screen.get_width() / 2) - (banner.get_width() / 2)
+bannerRect.y = 10
+
+buttonPlay = pg.image.load('assets/button.png')
+buttonPlay = pg.transform.scale(buttonPlay, (300, 100))
+buttonPlayRect = buttonPlay.get_rect()
+buttonPlayRect.x = (screen.get_width() / 2) - (buttonPlay.get_width() / 2)
+buttonPlayRect.y = bannerRect.y + banner.get_height() - buttonPlay.get_height()
+
 game = Game()
 
 clock = pg.time.Clock()
@@ -16,25 +28,11 @@ running = True
 while running:
     screen.blit(background, (0, -200))
 
-    screen.blit(game.player.image, game.player.rect)
-
-    game.player.updateHealthBar(screen)
-
-    for projectile in game.player.allProjectiles:
-        projectile.move()
-
-    for monster in game.allMonsters:
-        monster.forward()
-        monster.updateHealthBar(screen)
-
-    game.player.allProjectiles.draw(screen)
-
-    game.allMonsters.draw(screen)
-
-    if game.pressed.get(pg.K_RIGHT) and game.player.rect.x + game.player.rect.width - 35 < screen.get_width():
-        game.player.moveRight()
-    elif game.pressed.get(pg.K_LEFT) and game.player.rect.x + 35 > 0:
-        game.player.moveLeft()
+    if game.isPlaying:
+        game.update(screen)
+    else:
+        screen.blit(banner, bannerRect)
+        screen.blit(buttonPlay, buttonPlayRect)
 
     pg.display.flip()
 
@@ -47,9 +45,14 @@ while running:
         elif event.type == pg.KEYDOWN:
             game.pressed[event.key] = True
 
-            if event.key == pg.K_SPACE:
+            if event.key == pg.K_SPACE and not game.isPause:
                 game.player.launchProjectile()
+            elif event.key == pg.K_ESCAPE:
+                game.isPause = not game.isPause
         elif event.type == pg.KEYUP:
             game.pressed[event.key] = False
+        elif event.type == pg.MOUSEBUTTONDOWN:
+            if buttonPlayRect.collidepoint(event.pos):
+                game.start()
     
     

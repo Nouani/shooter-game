@@ -32,3 +32,5 @@ class Player(pg.sprite.Sprite):
     def damage(self, amount):
         if self.health - amount > amount:
             self.health -= amount
+        else:
+            self.game.gameOver()

@@ -7,7 +7,7 @@ class Monster(pg.sprite.Sprite):
         self.game = game
         self.health = 100
         self.maxHealth = 100
-        self.attack = 3
+        self.attack = 1
         self.image = pg.image.load('assets/mummy.png')
         self.rect = self.image.get_rect()
         self.rect.x = 1000 + random.randint(0, 500)
