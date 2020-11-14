@@ -18,6 +18,8 @@ while running:
 
     screen.blit(game.player.image, game.player.rect)
 
+    game.player.updateHealthBar(screen)
+
     for projectile in game.player.allProjectiles:
         projectile.move()
 

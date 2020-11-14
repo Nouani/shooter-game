@@ -7,7 +7,7 @@ class Monster(pg.sprite.Sprite):
         self.game = game
         self.health = 100
         self.maxHealth = 100
-        self.attack = 5
+        self.attack = 3
         self.image = pg.image.load('assets/mummy.png')
         self.rect = self.image.get_rect()
         self.rect.x = 1000 + random.randint(0, 500)
@@ -28,3 +28,5 @@ class Monster(pg.sprite.Sprite):
     def forward(self):
         if not self.game.checkCollision(self, self.game.allPlayers):
             self.rect.x -= self.velocity
+        else:
+            self.game.player.damage(self.attack)

@@ -7,7 +7,7 @@ class Player(pg.sprite.Sprite):
         self.game = game
         self.health = 100
         self.maxHealth = 100
-        self.attack = 10
+        self.attack = 5
         self.velocity = 10
         self.allProjectiles = pg.sprite.Group()
         self.image = pg.image.load('assets/player.png')
@@ -24,3 +24,11 @@ class Player(pg.sprite.Sprite):
 
     def launchProjectile(self):
         self.allProjectiles.add(Projectile(self))
+
+    def updateHealthBar(self, surface):
+        pg.draw.rect(surface, (60, 63, 60), [self.rect.x + 50, self.rect.y + 10, self.maxHealth, 5])
+        pg.draw.rect(surface, (111, 210, 46), [self.rect.x + 50, self.rect.y + 10, self.health, 5])
+
+    def damage(self, amount):
+        if self.health - amount > amount:
+            self.health -= amount
