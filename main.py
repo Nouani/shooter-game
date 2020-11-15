@@ -8,17 +8,29 @@ screen = pg.display.set_mode((1280, 720))
 
 background = pg.image.load('assets/bg.jpg')
 
-banner = pg.image.load('assets/banner.png')
-banner = pg.transform.scale(banner, (700, 700))
+banner = pg.image.load('assets/logo.png')
+#banner = pg.transform.scale(banner, (700, 700))
 bannerRect = banner.get_rect()
 bannerRect.x = (screen.get_width() / 2) - (banner.get_width() / 2)
-bannerRect.y = -60
+bannerRect.y = 60
 
-buttonPlay = pg.image.load('assets/button.png')
-buttonPlay = pg.transform.scale(buttonPlay, (300, 100))
+buttonPlay = pg.image.load('assets/button_play.png')
+#buttonPlay = pg.transform.scale(buttonPlay, (300, 100))
 buttonPlayRect = buttonPlay.get_rect()
 buttonPlayRect.x = (screen.get_width() / 2) - (buttonPlay.get_width() / 2)
-buttonPlayRect.y = bannerRect.y + banner.get_height() - buttonPlay.get_height() - 30
+buttonPlayRect.y = bannerRect.y + banner.get_height() - 20
+
+buttonHelp = pg.image.load('assets/button_help.png')
+#buttonPlay = pg.transform.scale(buttonPlay, (300, 100))
+buttonHelpRect = buttonHelp.get_rect()
+buttonHelpRect.x = (screen.get_width() / 2) - (buttonHelp.get_width() / 2)
+buttonHelpRect.y = buttonPlayRect.y + buttonPlay.get_height() - 20
+
+buttonQuit = pg.image.load('assets/button_quit.png')
+#buttonPlay = pg.transform.scale(buttonPlay, (300, 100))
+buttonQuitRect = buttonQuit.get_rect()
+buttonQuitRect.x = (screen.get_width() / 2) - (buttonQuit.get_width() / 2)
+buttonQuitRect.y = buttonHelpRect.y + buttonHelp.get_height() - 20
 
 game = Game()
 
@@ -33,6 +45,8 @@ while running:
     else:
         screen.blit(banner, bannerRect)
         screen.blit(buttonPlay, buttonPlayRect)
+        screen.blit(buttonHelp, buttonHelpRect)
+        screen.blit(buttonQuit, buttonQuitRect)
 
     pg.display.flip()
 
