@@ -6,7 +6,7 @@ from cometEvent import CometEvent
 class Game:
     def __init__(self):
         self.isPlaying = False
-        self.isPause = False
+        self.needsHelp = False
         self.allPlayers = pg.sprite.Group()
         self.player = Player(self)
         self.cometEvent = CometEvent(self)
@@ -39,22 +39,19 @@ class Game:
 
         self.player.updateHealthBar(screen)
 
-        if not self.isPause:
-            self.cometEvent.addPercent()
+        self.cometEvent.addPercent()
         self.cometEvent.updateBar(screen)
 
-        if not self.isPause:
-            for projectile in self.player.allProjectiles:
-                projectile.move()
+
+        for projectile in self.player.allProjectiles:
+            projectile.move()
 
         for monster in self.allMonsters:
-            if not self.isPause:
-                monster.forward()
+            monster.forward()
             monster.updateHealthBar(screen)
 
         for comet in self.cometEvent.allComets:
-            if not self.isPause:
-                comet.fall()
+            comet.fall()
 
         self.player.allProjectiles.draw(screen)
 
@@ -62,11 +59,10 @@ class Game:
 
         self.cometEvent.allComets.draw(screen)
 
-        if not self.isPause:
-            if self.pressed.get(pg.K_RIGHT) and self.player.rect.x + self.player.rect.width - 35 < screen.get_width():
-                self.player.moveRight()
-            elif self.pressed.get(pg.K_LEFT) and self.player.rect.x + 35 > 0:
-                self.player.moveLeft()
+        if self.pressed.get(pg.K_RIGHT) and self.player.rect.x + self.player.rect.width - 35 < screen.get_width():
+            self.player.moveRight()
+        elif self.pressed.get(pg.K_LEFT) and self.player.rect.x + 35 > 0:
+            self.player.moveLeft()
 
     def checkCollision(self, sprite, group):
         return pg.sprite.spritecollide(sprite, group, False, pg.sprite.collide_mask)
