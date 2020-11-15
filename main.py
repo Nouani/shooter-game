@@ -28,7 +28,7 @@ buttonQuitRect = buttonQuit.get_rect()
 buttonQuitRect.x = (screen.get_width() / 2) - (buttonQuit.get_width() / 2)
 buttonQuitRect.y = buttonHelpRect.y + buttonHelp.get_height() - 5
 
-helpBoard = pg.image.load('assets/teste.png')
+helpBoard = pg.image.load('assets/helpBoard.png')
 helpBoardRect = helpBoard.get_rect()
 helpBoardRect.x = (screen.get_width() / 2) - (helpBoard.get_width() / 2)
 helpBoardRect.y = (screen.get_height() / 2) - (helpBoard.get_height() / 2)
