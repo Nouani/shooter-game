@@ -2,6 +2,7 @@ import pygame as pg
 
 class Projectile(pg.sprite.Sprite):
     def __init__(self, player):
+        # inicializa as variaveis
         super().__init__()
         self.velocity = 6
         self.player = player
@@ -13,20 +14,23 @@ class Projectile(pg.sprite.Sprite):
         self.origin_image = self.image
         self.angle = 0
 
+    # movimenta o projetil
     def move(self):
         self.rect.x += self.velocity
         self.rotate()
 
-        for monster in self.player.game.checkCollision(self, self.player.game.allMonsters):
-            self.remove() 
-            monster.damage(self.player.attack)
+        for monster in self.player.game.checkCollision(self, self.player.game.allMonsters): # percorre uma lista de todos os monstros que estão colidindo com o projetil
+            self.remove()  # remove o projetil
+            monster.damage(self.player.attack) # aplica dano no monstro
 
-        if self.rect.x > 1280:
-            self.remove()
+        if self.rect.x > 1280: # se passar da tela
+            self.remove() # remove
 
+    # remove o projetil
     def remove(self):
         self.player.allProjectiles.remove(self)
 
+    # animação de rotação do projetil
     def rotate(self):
         self.angle += 16
         self.image = pg.transform.rotozoom(self.origin_image, self.angle, 1)
