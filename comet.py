@@ -33,6 +33,7 @@ class Comet(pg.sprite.Sprite):
         if self.cometEvent.game.checkCollision(self, self.cometEvent.game.allPlayers):
             self.remove()
             self.cometEvent.game.player.damage(20)
+            self.cometEvent.game.reduceScore()
 
     def cometRemoveSound(self):
         sfx = pg.mixer.Sound("assets/sounds/fireExplode.wav")  

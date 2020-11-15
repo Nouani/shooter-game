@@ -29,6 +29,12 @@ class Player(pg.sprite.Sprite):
         pg.draw.rect(surface, (60, 63, 60), [self.rect.x + 50, self.rect.y + 10, self.maxHealth, 5])
         pg.draw.rect(surface, (111, 210, 46), [self.rect.x + 50, self.rect.y + 10, self.health, 5])
 
+    def updateHealth(self):
+        if self.health + 10 > self.maxHealth:
+            self.health = self.maxHealth
+        else:
+            self.health += 10
+
     def damage(self, amount):
         if self.health - amount > amount:
             self.health -= amount

@@ -25,6 +25,7 @@ class Monster(pg.sprite.Sprite):
             if self.game.cometEvent.isFullLoaded():
                 self.game.allMonsters.remove(self)
                 self.game.cometEvent.attemptFall()
+                self.game.updateScore()
 
     def updateHealthBar(self, surface):
         pg.draw.rect(surface, (60, 63, 60), [self.rect.x + 13, self.rect.y - 10, self.maxHealth, 5])

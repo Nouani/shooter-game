@@ -12,7 +12,9 @@ class Game:
         self.cometEvent = CometEvent(self)
         self.allPlayers.add(self.player)
         self.allMonsters = pg.sprite.Group()
-        self.pressed = {}      
+        self.pressed = {}
+        self.score = 0
+        self.font = pg.font.Font('assets/FreeSansBold.ttf', 32)
 
     def start(self):
         self.isPlaying = True
@@ -59,6 +61,8 @@ class Game:
 
         self.cometEvent.allComets.draw(screen)
 
+        self.showScore(screen)
+
         if self.pressed.get(pg.K_RIGHT) and self.player.rect.x + self.player.rect.width - 35 < screen.get_width():
             self.player.moveRight()
         elif self.pressed.get(pg.K_LEFT) and self.player.rect.x + 35 > 0:
@@ -78,5 +82,16 @@ class Game:
 
     def tileSound(self):
         sfx = pg.mixer.Sound("assets/sounds/tir.ogg")  
-        sfx.set_volume(0.07)                       
+        sfx.set_volume(0.07)
         sfx.play()
+
+    def updateScore(self):
+        self.score += 5
+        self.player.updateHealth()
+    
+    def reduceScore(self):
+        self.score -= 3
+
+    def showScore(self, screen):
+        scoreScreen = self.font.render("Score: " + str(self.score), True, (255, 255, 255))
+        screen.blit(scoreScreen, (1120, 20))
