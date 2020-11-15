@@ -70,3 +70,13 @@ class Game:
     def spawnMonster(self):
         monster = Monster(self)
         self.allMonsters.add(monster)
+
+    def clickSound(self):
+        sfx = pg.mixer.Sound("assets/sounds/click.ogg")  
+        sfx.set_volume(0.07)                       
+        sfx.play()
+
+    def tileSound(self):
+        sfx = pg.mixer.Sound("assets/sounds/tir.ogg")  
+        sfx.set_volume(0.07)                       
+        sfx.play()

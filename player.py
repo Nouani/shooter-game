@@ -32,5 +32,11 @@ class Player(pg.sprite.Sprite):
     def damage(self, amount):
         if self.health - amount > amount:
             self.health -= amount
+            self.damageSound()
         else:
             self.game.gameOver()
+    
+    def damageSound(self):
+        sfx = pg.mixer.Sound("assets/sounds/damage.wav")  
+        sfx.set_volume(0.07)                       
+        sfx.play()

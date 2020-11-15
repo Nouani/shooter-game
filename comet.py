@@ -13,6 +13,7 @@ class Comet(pg.sprite.Sprite):
 
     def remove(self):
         self.cometEvent.allComets.remove(self)
+        self.cometRemoveSound()
 
         if len(self.cometEvent.allComets) == 0:
             self.cometEvent.resetPercent()
@@ -32,3 +33,8 @@ class Comet(pg.sprite.Sprite):
         if self.cometEvent.game.checkCollision(self, self.cometEvent.game.allPlayers):
             self.remove()
             self.cometEvent.game.player.damage(20)
+
+    def cometRemoveSound(self):
+        sfx = pg.mixer.Sound("assets/sounds/fireExplode.wav")  
+        sfx.set_volume(0.07)                       
+        sfx.play()

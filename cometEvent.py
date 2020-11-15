@@ -25,9 +25,15 @@ class CometEvent:
 
     def attemptFall(self):
         if self.isFullLoaded() and len(self.game.allMonsters) == 0:
+            self.meteoriteSound()
             self.meteorFall()
             self.fallMode = True
 
     def updateBar(self, surface):
         pg.draw.rect(surface, (0, 0, 0), [0, surface.get_height() - 20, surface.get_width(), 10])
         pg.draw.rect(surface, (187, 11, 11), [0, surface.get_height() - 20, (surface.get_width() / 100) * self.percent, 10])
+
+    def meteoriteSound(self):
+        sfx = pg.mixer.Sound("assets/sounds/meteorite.ogg")  
+        sfx.set_volume(0.07)                       
+        sfx.play()

@@ -16,6 +16,7 @@ class Monster(pg.sprite.Sprite):
 
     def damage(self, amount):
         self.health -= amount
+        self.damageSound()
         if self.health <= 0:
             self.rect.x = 1000 + random.randint(0, 500)
             self.velocity = random.randint(2, 4)
@@ -34,3 +35,8 @@ class Monster(pg.sprite.Sprite):
             self.rect.x -= self.velocity
         else:
             self.game.player.damage(self.attack)
+
+    def damageSound(self):
+        sfx = pg.mixer.Sound("assets/sounds/damageEnemy.wav")  
+        sfx.set_volume(0.07)                       
+        sfx.play()

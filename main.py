@@ -75,18 +75,21 @@ while running:
             game.pressed[event.key] = True
 
             if event.key == pg.K_SPACE:
+                game.tileSound()
                 game.player.launchProjectile()
         elif event.type == pg.KEYUP:
             game.pressed[event.key] = False
         elif event.type == pg.MOUSEBUTTONDOWN and not game.isPlaying:
             if buttonPlayRect.collidepoint(event.pos):
+                game.clickSound()
                 game.start()
             elif buttonHelpRect.collidepoint(event.pos):
+                game.clickSound()
                 game.needsHelp = True
             elif buttonQuitRect.collidepoint(event.pos):
+                game.clickSound()
                 running = False
                 pg.quit()
             elif buttonCloseRect.collidepoint(event.pos):
+                game.clickSound()
                 game.needsHelp = False
-    
-    
