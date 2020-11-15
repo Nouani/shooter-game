@@ -12,7 +12,7 @@ class Monster(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = 1000 + random.randint(0, 500)
         self.rect.y = 540
-        self.velocity = random.randint(2,4)
+        self.velocity = random.randint(1,4)
 
     def damage(self, amount):
         self.health -= amount
@@ -20,6 +20,10 @@ class Monster(pg.sprite.Sprite):
             self.rect.x = 1000 + random.randint(0, 500)
             self.velocity = random.randint(2, 4)
             self.health = self.maxHealth
+
+            if self.game.cometEvent.isFullLoaded():
+                self.game.allMonsters.remove(self)
+                self.game.cometEvent.attemptFall()
 
     def updateHealthBar(self, surface):
         pg.draw.rect(surface, (60, 63, 60), [self.rect.x + 13, self.rect.y - 10, self.maxHealth, 5])

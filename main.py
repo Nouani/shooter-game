@@ -9,16 +9,16 @@ screen = pg.display.set_mode((1280, 720))
 background = pg.image.load('assets/bg.jpg')
 
 banner = pg.image.load('assets/banner.png')
-banner = pg.transform.scale(banner, (500, 500))
+banner = pg.transform.scale(banner, (700, 700))
 bannerRect = banner.get_rect()
 bannerRect.x = (screen.get_width() / 2) - (banner.get_width() / 2)
-bannerRect.y = 10
+bannerRect.y = -60
 
 buttonPlay = pg.image.load('assets/button.png')
 buttonPlay = pg.transform.scale(buttonPlay, (300, 100))
 buttonPlayRect = buttonPlay.get_rect()
 buttonPlayRect.x = (screen.get_width() / 2) - (buttonPlay.get_width() / 2)
-buttonPlayRect.y = bannerRect.y + banner.get_height() - buttonPlay.get_height()
+buttonPlayRect.y = bannerRect.y + banner.get_height() - buttonPlay.get_height() - 30
 
 game = Game()
 
@@ -47,7 +47,7 @@ while running:
 
             if event.key == pg.K_SPACE and not game.isPause:
                 game.player.launchProjectile()
-            elif event.key == pg.K_ESCAPE:
+            elif event.key == pg.K_ESCAPE and game.isPlaying:
                 game.isPause = not game.isPause
         elif event.type == pg.KEYUP:
             game.pressed[event.key] = False

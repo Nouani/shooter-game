@@ -7,7 +7,7 @@ class Player(pg.sprite.Sprite):
         self.game = game
         self.health = 100
         self.maxHealth = 100
-        self.attack = 5
+        self.attack = 7
         self.velocity = 10
         self.allProjectiles = pg.sprite.Group()
         self.image = pg.image.load('assets/player.png')
